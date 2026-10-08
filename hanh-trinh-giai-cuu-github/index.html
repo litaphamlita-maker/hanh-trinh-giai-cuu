@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hành Trình Giải Cứu Đồng Đội</title>
+<meta name="description" content="Game phiêu lưu 12 chặng giải cứu đồng đội">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="game" class="game">
+  <div class="topbar">
+    <div id="stageLabel" class="pill">HÀNH TRÌNH GIẢI CỨU</div>
+    <div class="health-wrap">
+      <div class="pill">❤️ <span id="healthText">10/10</span></div>
+      <div id="health" class="health" aria-label="Máu"></div>
+    </div>
+  </div>
+
+  <div class="progress"><i id="progressBar"></i></div>
+
+  <section class="map" aria-label="Bản đồ 12 chặng">
+    <div class="path"></div>
+    <div class="node" data-stage="0" style="top:88%">1</div>
+    <div class="node" data-stage="1" style="top:81%">2</div>
+    <div class="node" data-stage="2" style="top:74%">3</div>
+    <div class="node" data-stage="3" style="top:67%">4</div>
+    <div class="node" data-stage="4" style="top:60%">5</div>
+    <div class="node" data-stage="5" style="top:53%">6</div>
+    <div class="node" data-stage="6" style="top:46%">7</div>
+    <div class="node" data-stage="7" style="top:39%">8</div>
+    <div class="node" data-stage="8" style="top:32%">9</div>
+    <div class="node" data-stage="9" style="top:25%">10</div>
+    <div class="node" data-stage="10" style="top:18%">11</div>
+    <div class="node" data-stage="11" style="top:11%">12</div>
+  </section>
+
+  <img id="hero" class="character" src="assets/hero.svg" alt="Nhân vật">
+  <img id="snake" class="snake" src="assets/snake.svg" alt="Con rắn">
+  <div id="biteMark" class="bite-mark">🦷❤️‍🩹</div>
+
+  <section class="story">
+    <h3>🌿 Hành trình giải cứu</h3>
+    <p>Vượt qua 12 chặng trong khu rừng. Mỗi con rắn là một thử thách. Hãy dùng kiến thức để tiến về phía đồng đội!</p>
+  </section>
+
+  <!-- START -->
+  <div id="startOverlay" class="overlay">
+    <div class="card hero-card">
+      <div style="font-size:62px">🚩 🧒🏻 🌳 ⚔️</div>
+      <h1 class="big-title">HÀNH TRÌNH<br>GIẢI CỨU ĐỒNG ĐỘI</h1>
+      <p class="subtitle">
+        Đồng đội đang bị bọn khổng lồ bắt giữ. Bạn phải vượt qua <b>12 chặng đường rừng</b>.
+        Mỗi chặng gặp một con rắn và một câu hỏi.
+      </p>
+      <p class="subtitle"><b>Đúng:</b> 🐍 biến mất &nbsp; | &nbsp; <b>Sai:</b> 🐍 cắn 1 lần, mất 1 máu.</p>
+      <p class="subtitle">Bạn có <b>10 máu</b>. Nếu còn máu khi đến chặng 12, bạn sẽ nhận gươm và giải cứu đồng đội.</p>
+      <button class="btn" onclick="startGame()">BẮT ĐẦU HÀNH TRÌNH 🚀</button>
+      <p class="small">Câu hỏi được quản lý riêng trong <b>data/questions.json</b>.</p>
+      <p id="loadingError" class="hidden" style="color:#b4322b;font-weight:900"></p>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div id="questionOverlay" class="overlay hidden">
+    <div class="card">
+      <div id="questionStage" class="stage-title"></div>
+      <div id="questionText" class="question"></div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- RESCUE -->
+  <div id="rescueOverlay" class="overlay hidden">
+    <div class="card hero-card">
+      <div style="font-size:48px">⚔️ 🏆 🌟</div>
+      <h1 class="big-title" style="font-size:43px">CHẶNG 12 — GIẢI CỨU!</h1>
+      <p class="subtitle">Bạn đã vượt qua cả 12 con rắn. Đồng đội đang bị trói trong khu vực của bọn khổng lồ.</p>
+      <div class="rescue-scene">
+        <img id="giant" class="giant" src="assets/giant.svg" alt="Khổng lồ">
+        <div id="cage" class="cage"></div>
+        <img id="friend" class="friend" src="assets/friend.svg" alt="Đồng đội">
+        <div id="cuts" class="cuts">⚔️〰️💥</div>
+      </div>
+      <p id="ropeText" class="subtitle">Hãy nhận gươm và chặt dây!</p>
+      <button id="rescueButton" class="btn rescue-btn" onclick="rescue()">NHẬN GƯƠM & CHẶT DÂY ⚔️</button>
+    </div>
+  </div>
+
+  <!-- VICTORY -->
+  <div id="victoryOverlay" class="overlay hidden">
+    <div class="card hero-card victory-card">
+      <div class="confetti">🎉🏡🌈</div>
+      <h1 class="big-title">CHIẾN THẮNG!</h1>
+      <p class="subtitle"><b>Đồng đội đã được giải cứu!</b></p>
+      <p class="subtitle">Cả nhóm cùng chạy khỏi khu rừng, trở về nhà an toàn và hạnh phúc. 🏃‍♂️🏃‍♀️🏡</p>
+      <p id="finalHealth" class="subtitle"></p>
+      <button class="btn" onclick="restart()">CHƠI LẠI 🔄</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="gameoverOverlay" class="overlay hidden">
+    <div class="card hero-card">
+      <div style="font-size:75px">💔🐍</div>
+      <h1 class="big-title">HẾT MÁU!</h1>
+      <p class="subtitle">Bạn đã bị cắn 10 lần trước khi đến đích. Đồng đội vẫn đang chờ bạn.</p>
+      <button class="btn" onclick="restart()">THỬ LẠI 🔄</button>
+    </div>
+  </div>
+</main>
+<script src="game.js"></script>
+</body>
+</html>

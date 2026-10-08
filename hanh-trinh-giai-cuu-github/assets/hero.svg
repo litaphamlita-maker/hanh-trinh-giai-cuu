@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 300">
+<defs><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e7f8ff"/></linearGradient></defs>
+<ellipse cx="110" cy="282" rx="62" ry="10" fill="#275c43" opacity=".22"/>
+<!-- backpack -->
+<rect x="38" y="125" width="46" height="100" rx="18" fill="#1f5f55"/>
+<path d="M55 130 Q30 178 55 225" fill="none" stroke="#163f39" stroke-width="8"/>
+<!-- legs -->
+<path d="M87 215 L73 269" stroke="#4d382f" stroke-width="20" stroke-linecap="round"/>
+<path d="M134 215 L151 269" stroke="#4d382f" stroke-width="20" stroke-linecap="round"/>
+<path d="M67 270 Q78 264 94 271 L102 284 Q79 292 59 282Z" fill="#35a9d7"/>
+<path d="M144 269 Q159 262 173 271 L181 282 Q158 291 140 282Z" fill="#35a9d7"/>
+<!-- body -->
+<path d="M78 115 Q110 96 143 115 L157 215 Q110 237 65 215Z" fill="url(#shirt)" stroke="#dbeff5" stroke-width="3"/>
+<path d="M79 120 L66 185" stroke="#e9423b" stroke-width="8"/>
+<path d="M142 120 L156 185" stroke="#e9423b" stroke-width="8"/>
+<!-- arms -->
+<path d="M76 132 Q44 153 32 185" stroke="#f2a07a" stroke-width="18" fill="none" stroke-linecap="round"/>
+<path d="M143 132 Q169 111 180 80" stroke="#f2a07a" stroke-width="18" fill="none" stroke-linecap="round"/>
+<!-- flag pole -->
+<path d="M181 82 L181 10" stroke="#6a4023" stroke-width="6" stroke-linecap="round"/>
+<path d="M181 13 Q146 7 118 27 L181 44Z" fill="#ed3e32"/>
+<!-- head -->
+<circle cx="110" cy="82" r="51" fill="#f3aa83"/>
+<!-- hair -->
+<path d="M63 77 Q59 27 111 25 Q161 26 161 75 Q146 54 130 57 Q112 39 94 58 Q78 54 63 77Z" fill="#6a3824"/>
+<path d="M73 45 Q92 19 123 29" fill="none" stroke="#8d4d2f" stroke-width="12" stroke-linecap="round"/>
+<!-- face -->
+<circle cx="92" cy="83" r="5" fill="#3d2922"/><circle cx="130" cy="83" r="5" fill="#3d2922"/>
+<path d="M91 104 Q111 121 133 101" fill="none" stroke="#9e392d" stroke-width="5" stroke-linecap="round"/>
+<path d="M82 76 Q70 66 68 52" fill="none" stroke="#f2d7b4" stroke-width="9" stroke-linecap="round"/>
+<!-- raised hand -->
+<circle cx="180" cy="72" r="11" fill="#f2a07a"/>
+</svg>
